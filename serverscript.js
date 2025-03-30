@@ -1,4 +1,4 @@
-const webservice = "https://notes-backend-3c5r.onrender.com"// "http://localhost:3008"
+const webservice = "http://localhost:3008"//"https://notes-backend-3c5r.onrender.com"
 
 
 async function createuser() {
@@ -203,43 +203,78 @@ async function criarPost() {
     }
 }
 
-  function exibirPosts(posts) {
-    const containerPosts = document.getElementById('posts-container');
-    containerPosts.innerHTML = '';
-
-    if (!posts || posts.length === 0) {
-        containerPosts.innerHTML = '<p>Nenhum post encontrado.</p>';
-        return;
-    }
-
+function exibirPosts(posts) {
+    const container = document.getElementById('posts-container');
+    container.innerHTML = '';
+  
     posts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.className = 'post';
-        
-        // Verificação segura dos campos
-        const title = post.title || 'Sem título';
-        const content = post.content || 'Conteúdo não disponível';
-        const date = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : 'Data desconhecida';
-        
-        postElement.innerHTML = `
-            <h3>${title}</h3>
-            <hr>
-            <p>${content}</p>
-            <div class="post-meta">
-                <span>Data: ${date}</span>
-            </div>
-        `;
-        containerPosts.appendChild(postElement);
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.dataset.postId = post.id; // Armazena o ID do post
+      
+      postElement.innerHTML = `
+        <h3>${post.title}</h3>
+        <hr>
+        <p>${post.content}</p>
+        <div class="post-meta">
+          <span>Data: ${new Date(post.createdAt).toLocaleDateString()}</span>
+        </div>
+      `;
+  
+      // Adiciona o evento de clique
+      postElement.addEventListener('click', () => abrirPost(post));
+      
+      container.appendChild(postElement);
     });
+  }
+  
+  function abrirPost(post) {
+    console.log('Post clicado:', post);
+    
+    // Aqui você pode:
+    // 1. Mostrar os detalhes completos
+    // 2. Redirecionar para uma página de edição
+    // 3. Abrir um modal com as informações
+    
+    // Exemplo: Armazenar o post selecionado
+    localStorage.setItem('selectedPost', JSON.stringify(post));
+    window.location.href = `view.html?id=${post.id}`;
+  }
+
+  
+  async function buscarPostDetalhado(id) {
+    try {
+      const response = await fetch(`${webservice}/posts/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+      });
+      
+      const post = await response.json();
+      
+      document.getElementById('post-titulo').textContent = post.title;
+      document.getElementById('editor').textContent = post.content;
+      document.getElementById('post-autor').textContent = `Autor: ${post.author.username}`;
+      document.getElementById('post-date').textContent = `${new Date(post.createdAt).toLocaleString()}`;
+      
+    } catch (error) {
+        console.error('Erro:', error);
+    }
 }
 
-
-
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const postId = urlParams.get('id');
+  
+  if (postId) {
+    buscarPostDetalhado(postId);
+  }
+});
 // Chama a função
 if (window.location.pathname.includes('index.html')){
-VerToken();
+    VerToken();
 }
 if (window.location.pathname.includes('index.html')){
-carregarPosts();
-setInterval(carregarPosts, 30000);
+    carregarPosts();
+    setInterval(carregarPosts, 30000);
 }

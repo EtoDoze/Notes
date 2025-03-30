@@ -72,3 +72,110 @@
 hr{
     color: rgb(11, 11, 175);
 }
+
+.bodyview{
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(90deg, rgb(0, 26, 255), rgb(76, 78, 221), rgb(70, 85, 223), rgb(51, 75, 180));
+    background-repeat: no-repeat;
+}
+
+#post-detalhes{
+    background: rgb(31, 31, 230);
+    width: 60%;
+    height: 96%;
+    margin: 0 auto 0;
+    border: 1px solid rgb(15, 15, 66);
+    border-end-end-radius: 20px;
+}
+
+#titlepost{
+    color: #5867f5;
+    background: blue;
+    border-end-end-radius: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(15, 15, 66)
+}
+
+#post-date{
+    text-shadow: 0 0 2px #030831, 0 0 2px #150c96, 0 0 5px #0017e6;
+    margin: 5px;
+    font-family: personaP;
+}
+
+#post-titulo{
+    font-family:monospace;
+    font-family: personaP;
+    font-size: 25px;
+    margin: 10px;
+    text-shadow: 0 0 3px #030831, 0 0 5px #150c96, 0 0 5px #0017e6;
+}
+
+#post-conteudo{
+    color: white;
+    font-family: "personaP";
+    margin: 5px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+
+
+/* EDITOR */
+
+
+/* EDITOR */
+.editor-container {
+    max-width: 60%;
+    margin: 0 auto;
+    background: rgb(31, 31, 230);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    overflow: auto;
+    display: flex; /* Adicionado */
+    margin-top: 20px; /* Espaço do topo */
+}
+
+.toolbar {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 5vw;
+    background: #f0f0f0;
+    border-radius: 5px 0 0 5px;
+    border-right: 1px solid #ccc;
+    position: static; /* Removido o fixed */
+    align-self: flex-start; /* Alinha no topo */
+}
+
+.toolbar button, .toolbar select {
+    padding: 2.5px 0px;
+    width: 3.5vw;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem; /* Melhora legibilidade */
+}
+
+.editor-content {
+    min-height: 300px;
+    padding: 20px;
+    outline: none;
+    flex: 1; /* Ocupa todo espaço restante */
+    background: white; /* Fundo branco para o editor */
+    border-radius: 0 5px 5px 0; /* Arredonda só o lado direito */
+}
+
+.editor-content:focus {
+    border: 1px solid #4CAF50;
+}
+
+/* Ajustes específicos para os botões */
+#U-BTN, #fontBTN, #right-BTN {
+    margin-bottom: 10px;
+}

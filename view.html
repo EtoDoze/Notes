@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+  <title>Detalhes do Post</title>
+</head>
+<body class="bodyview">
+    <div class="editor-container">
+        <div class="toolbar">
+            <button onclick="formatText('bold')" title="Negrito"><b>B</b></button>
+            <button onclick="formatText('italic')" title="Itálico"><i>I</i></button>
+            <button id="U-BTN" onclick="formatText('underline')" title="Sublinhado"><u>U</u></button>
+            
+            <select onchange="formatText('fontSize', this.value)">
+                <option value="">Tamanho</option>
+                <option value="1">Pequeno</option>
+                <option value="3">Normal</option>
+                <option value="5">Grande</option>
+                <option value="7">Muito Grande</option>
+            </select>
+            
+            <select id="fontBTN" onchange="formatText('fontFamily', this.value)">
+                <option value="">Fonte</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </select>
+            
+            <button onclick="formatText('justifyLeft')" title="Alinhar à esquerda">◀</button>
+            <button onclick="formatText('justifyCenter')" title="Centralizar">≡</button>
+            <button onclick="formatText('justifyRight')" id="right-BTN" title="Alinhar à direita">▶</button>
+            
+            <button onclick="clearText()" title="Limpar">Limpar</button>
+        </div>
+        
+        <div id="editor" class="editor-content" contenteditable="true"></div>
+    </div>
+<script src="serverscript.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
