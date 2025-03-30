@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@400">
 </head>
-<body>
-    <header>
-        <h1>header</h1>
+<body id="bodyI">
+    <header id="headerI">
         <p id="user"></p>
     </header>
+    <aside>
+        <input placeholder="titulo" id="titulo-post">
+        <input placeholder="conteudo" id="conteudo-post">
+        <span class="material-symbols-rounded" onclick="criarPost()">add</span>
+    </aside>
+    <main>
+        <div id="loading" style="display: none;">Carregando posts...</div>
+        <div id="error-message" style="display: none; color: red;"></div>
+        <div id="posts-container"></div>
+    </main>
+<script src="serverscript.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
