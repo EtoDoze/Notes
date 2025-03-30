@@ -107,9 +107,8 @@ hr{
 }
 
 #post-titulo{
-    font-family:monospace;
     font-family: personaP;
-    font-size: 25px;
+    font-size: 20px;
     margin: 10px;
     text-shadow: 0 0 3px #030831, 0 0 5px #150c96, 0 0 5px #0017e6;
 }
@@ -119,15 +118,35 @@ hr{
     font-family: "personaP";
     margin: 5px;
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 10px;
 }
 
+.post-cont h3{
+    font-size: 20px;
+    margin-right: 5px;
+    width: 8vw;
+}
+.post-cont span{
+    color: #457bf1;
+    font-size: 13px;
+}
+.post-cont{
+    display: flex;
+    justify-content: space-between;
+    margin: 2px;
+    font-family: "personaP";
+    align-items: center;
+}
 
+#post-cont-index{
+    overflow-y: hidden;
+    color: red;
+}
 
 /* EDITOR */
 
 
-/* EDITOR */
+
 .editor-container {
     max-width: 60%;
     margin: 0 auto;
@@ -141,19 +160,18 @@ hr{
 
 .toolbar {
     padding: 10px;
+    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
     gap: 5px;
     width: 5vw;
-    background: #f0f0f0;
     border-radius: 5px 0 0 5px;
-    border-right: 1px solid #ccc;
     position: static; /* Removido o fixed */
     align-self: flex-start; /* Alinha no topo */
 }
 
 .toolbar button, .toolbar select {
-    padding: 2.5px 0px;
+    padding: 2px 0px;
     width: 3.5vw;
     border: 1px solid #ccc;
     background: white;
@@ -162,15 +180,17 @@ hr{
     font-size: 0.8rem; /* Melhora legibilidade */
 }
 
-.toolbar button:active{
-    background: rgb(44, 44, 44);
+.toolbar button:focus{
+    background: rgb(223, 223, 223);
 }
 
 .editor-content {
-    min-height: 300px;
+    max-height: 340px;
     padding: 20px;
     outline: none;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: scroll;
+    scrollbar-width: none;
     flex: 1; /* Ocupa todo espaço restante */
     background: white; /* Fundo branco para o editor */
     border-radius: 0 5px 5px 0; /* Arredonda só o lado direito */

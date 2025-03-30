@@ -213,12 +213,13 @@ function exibirPosts(posts) {
       postElement.dataset.postId = post.id; // Armazena o ID do post
       
       postElement.innerHTML = `
+      <div class="post-cont">
         <h3>${post.title}</h3>
-        <hr>
-        <p>${post.content}</p>
-        <div class="post-meta">
-          <span>Data: ${new Date(post.createdAt).toLocaleDateString()}</span>
+        <span> ${new Date(post.createdAt).toLocaleDateString()}</span>
         </div>
+        <hr>
+        <p id="post-cont-index">${post.content}</p>
+        
       `;
   
       // Adiciona o evento de clique
@@ -244,23 +245,90 @@ function exibirPosts(posts) {
   
   async function buscarPostDetalhado(id) {
     try {
-      const response = await fetch(`${webservice}/posts/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        const response = await fetch(`${webservice}/posts/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Post não encontrado');
         }
-      });
-      
-      const post = await response.json();
-      
-      document.getElementById('post-titulo').textContent = post.title;
-      document.getElementById('editor').textContent = post.content;
-      document.getElementById('post-autor').textContent = `Autor: ${post.author.username}`;
-      document.getElementById('post-date').textContent = `${new Date(post.createdAt).toLocaleString()}`;
-      
+        
+        const post = await response.json();
+        
+        // Atualize para usar innerHTML em vez de textContent
+        document.getElementById('post-titulo').textContent = post.title;
+        document.getElementById('editor').innerHTML = post.content; // Alterado aqui
+        document.getElementById('post-date').textContent = `${new Date(post.createdAt).toLocaleString()}`;
+        
     } catch (error) {
         console.error('Erro:', error);
+        alert('Erro ao carregar post: ' + error.message);
     }
 }
+
+async function EditPost() {
+    try {
+        const postId = new URLSearchParams(window.location.search).get('id');
+        const title = document.getElementById('post-titulo').textContent;
+        const content = document.getElementById('editor').innerHTML;
+        const token = localStorage.getItem('authToken');
+
+        if (!title || !content) {
+            return alert("O post não pode estar vazio!");
+        }
+
+        const response = await fetch(`${webservice}/posts/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ title, content })
+        });
+
+        // Verificar se a resposta é JSON
+        if (response.status === 404) {
+            throw new Error('Endpoint não encontrado. Verifique a URL do servidor.');
+        }
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Erro ao atualizar post');
+        }
+
+        alert('Post atualizado com sucesso!');
+        window.location.href = 'index.html'; // Redireciona após sucesso
+        
+    } catch (error) {
+        console.error('Erro na atualização:', error);
+        alert(`Erro: ${error.message}`);
+    }
+}
+
+
+
+// Modifique o evento DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Verifique se estamos na página correta
+    if (window.location.pathname.includes('view.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+        
+        if (postId) {
+            buscarPostDetalhado(postId);
+        } else {
+            console.error('ID do post não encontrado na URL');
+        }
+        
+        // Verifique se o token existe
+        if (!localStorage.getItem('authToken')) {
+            window.location.href = 'login.html';
+        }
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -278,3 +346,4 @@ if (window.location.pathname.includes('index.html')){
     carregarPosts();
     setInterval(carregarPosts, 30000);
 }
+

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
   <title>Detalhes do Post</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
 </head>
 <body class="bodyview">
+
+    <div id="titlepost">
+        <h2 id="post-titulo"></h2>
+        <span id="post-date"></span>
+    </div>
     <div class="editor-container">
         <div class="toolbar">
-            <button onclick="formatText('bold')" title="Negrito"><b>B</b></button>
-            <button onclick="formatText('italic')" title="Itálico"><i>I</i></button>
-            <button id="U-BTN" onclick="formatText('underline')" title="Sublinhado"><u>U</u></button>
+            
+            <button onclick="formatText('bold')" title="Negrito"><b><span class="material-symbols-rounded">format_bold</span></b></button>
+            <button onclick="formatText('italic')" title="Itálico"><i><span class="material-symbols-rounded">format_italic</span></i></button>
+            <button id="U-BTN" onclick="formatText('underline')" title="Sublinhado"><u><span class="material-symbols-rounded">format_underlined</span></u></button>
             
             <select onchange="formatText('fontSize', this.value)">
                 <option value="">Tamanho</option>
@@ -31,11 +38,13 @@
             <button onclick="formatText('justifyCenter')" title="Centralizar">≡</button>
             <button onclick="formatText('justifyRight')" id="right-BTN" title="Alinhar à direita">▶</button>
             
-            <button onclick="clearText()" title="Limpar">Limpar</button>
+            <button onclick="clearText()" title="Limpar"><span class="material-symbols-rounded">delete_forever</span></button>
+            <span class="material-symbols-rounded" onclick="EditPost()">save</span>
         </div>
         
         <div id="editor" class="editor-content" contenteditable="true"></div>
     </div>
+
 <script src="serverscript.js"></script>
 <script src="script.js"></script>
 </body>
