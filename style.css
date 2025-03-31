@@ -51,7 +51,11 @@ html,#bodyI{
     height: 40vh;
     border-radius: 20px;
     border-right: 1px solid white;
-    transition: transform 0.3s ease
+    transition: transform 0.3s ease;
+}
+
+.post hr{
+
 }
 
 .post:hover{
@@ -185,12 +189,12 @@ aside img:hover{
 
 .post-cont h3{
     font-size: 20px;
-    margin-right: 5px;
+    margin-right: 0px;
     width: 8vw;
 }
 .post-cont span{
     color: #457bf1;
-    font-size: 13px;
+    font-size: 14px;
 }
 .post-cont{
     display: flex;
@@ -208,9 +212,38 @@ aside img:hover{
     justify-content: flex-start; /* Alinha posts à esquerda */
     margin: 0;              /* Remove margem anterior */
   }
-#post-cont-index{
-    overflow-y: hidden;
+/* Estilo para o conteúdo do post */
+.post-content-text {
+    font-family: 'personaP', monospace;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 1.4;
+    padding: 8px;
+    margin: 5px 0;
+    overflow: hidden;
+}
+
+/* Estilo para negrito dentro do conteúdo */
+.post-content-text b,
+.post-content-text strong {
     font-family: "personaP";
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: normal;
+    text-shadow: 0 0 3px rgba(0, 26, 255, 0.7);
+}
+
+/* Estilo para itálico */
+.post-content-text i,
+.post-content-text em {
+    font-style: normal;
+    color: #ffffff;
+}
+
+/* Estilo para links */
+.post-content-text a {
+    color: #00ffff;
+    text-decoration: underline;
 }
 
 /* EDITOR */

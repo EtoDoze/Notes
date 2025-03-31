@@ -1,4 +1,4 @@
-const webservice =  "https://notes-backend-3c5r.onrender.com"
+const webservice =  "https://notes-backend-3c5r.onrender.com" //"http://localhost:3008"
 
 
 async function createuser() {
@@ -210,24 +210,53 @@ function exibirPosts(posts) {
     posts.forEach(post => {
       const postElement = document.createElement('div');
       postElement.className = 'post';
-      postElement.dataset.postId = post.id; // Armazena o ID do post
+      postElement.dataset.postId = post.id;
+      
+      // Processa o conteúdo para limitar a 10 palavras e manter formatação
+      const limitedContent = limitContentWithFormatting(post.content, 10);
       
       postElement.innerHTML = `
       <div class="post-cont">
         <h3>${post.title}</h3>
-        <span> ${new Date(post.createdAt).toLocaleDateString()}</span>
-        </div>
-        <hr>
-        <p id="post-cont-index">${post.content}</p>
-        
+        <span>${new Date(post.createdAt).toLocaleDateString()}</span>
+      </div>
+      <hr>
+      <div class="post-content-text">${limitedContent}</div>
       `;
-  
-      // Adiciona o evento de clique
-      postElement.addEventListener('click', () => abrirPost(post));
       
+      postElement.addEventListener('click', () => abrirPost(post));
       container.appendChild(postElement);
     });
-  }
+}
+
+// Função auxiliar para limitar conteúdo mantendo formatação HTML
+function limitContentWithFormatting(content, wordLimit) {
+    // Cria um elemento temporário para parsear o HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    
+    // Pega o texto puro (sem tags) para contar palavras
+    const textContent = tempDiv.textContent || '';
+    const words = textContent.trim().split(/\s+/);
+    
+    if (words.length <= wordLimit) {
+        return content; // Retorna original se já for curto
+    }
+    
+    // Encontra a posição onde cortar
+    let count = 0;
+    let position = 0;
+    while (count < wordLimit && position < content.length) {
+        // Avança até o próximo espaço
+        position = content.indexOf(' ', position + 1);
+        if (position === -1) break;
+        count++;
+    }
+    
+    // Corta o conteúdo mantendo as tags
+    const truncated = position !== -1 ? content.substring(0, position) : content;
+    return truncated + '...';
+}
   
   function abrirPost(post) {
     console.log('Post clicado:', post);
