@@ -9,19 +9,18 @@
 </head>
 <body id="bodyI">
     <header id="headerI">
-        <p id="user"></p>
+      <p id="user"></p>
     </header>
-    <aside>
+    <main>
+      <aside>
         <input placeholder="titulo" id="titulo-post">
         <input placeholder="conteudo" id="conteudo-post">
+        <img src="images/makoto.png">
         <span class="material-symbols-rounded" onclick="criarPost()">add</span>
-    </aside>
-    <main>
-        <div id="loading" style="display: none;">Carregando posts...</div>
-        <div id="error-message" style="display: none; color: red;"></div>
-        <div id="posts-container"></div>
+      </aside>
+      <div id="posts-container"></div>
     </main>
-<script src="serverscript.js"></script>
-<script src="script.js"></script>
+    <script src="serverscript.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
