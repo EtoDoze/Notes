@@ -1,4 +1,4 @@
-const webservice =  "https://notes-backend-3c5r.onrender.com" //"http://localhost:3008"
+const webservice =  "http://localhost:3008" //"https://notes-backend-3c5r.onrender.com"
 
 
 async function createuser() {
@@ -183,6 +183,11 @@ async function criarPost() {
     try {
         const token = localStorage.getItem('authToken');
         
+        // Verifica se o token existe
+        if (!token) {
+            throw new Error('Token de autenticação não encontrado');
+        }
+
         const response = await fetch(`${webservice}/myposts`, {
             method: 'GET',
             headers: {
@@ -190,16 +195,37 @@ async function criarPost() {
             }
         });
 
+        // Verifica se a resposta foi bem sucedida
         if (!response.ok) {
-            throw new Error('Erro ao carregar posts');
+            // Tenta obter a mensagem de erro da resposta
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Erro HTTP: ${response.status}`);
         }
 
         const posts = await response.json();
+        
+        // Verifica se os posts foram recebidos corretamente
+        if (!Array.isArray(posts)) {
+            throw new Error('Formato de dados inválido recebido do servidor');
+        }
+
         exibirPosts(posts);
         
     } catch (error) {
-        console.error('Erro:', error);
-        alert('Falha ao carregar posts: ' + error.message);
+        console.error('Erro detalhado:', error);
+        
+        // Mostra mensagem mais amigável para o usuário
+        const errorMessage = error.message.includes('Token') ? 
+            'Sessão expirada. Por favor, faça login novamente.' : 
+            'Falha ao carregar posts. Tente novamente mais tarde.';
+        
+        alert(errorMessage);
+        
+        // Redireciona para login se o token for inválido
+        if (error.message.includes('Token')) {
+            localStorage.removeItem('authToken');
+            window.location.href = 'login.html';
+        }
     }
 }
 
