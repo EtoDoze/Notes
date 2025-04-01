@@ -145,11 +145,17 @@ async function criarPost() {
     // 1. Pegar o conteúdo do post do formulário
     const titulo = document.getElementById('titulo-post').value;
     const conteudo = document.getElementById('conteudo-post').value;
+    const messager = document.getElementById('create_messager')
     
-    if(!titulo || !conteudo){return alert("Preencha todos os campos!");}
+
+    if(!titulo || !conteudo){ messager.textContent = "Preencha todos os campos!"; return;}
     // 2. Pegar o token do localStorage
     const token = localStorage.getItem('authToken');
-  
+    if(titulo.length > 10) {
+        messager.textContent = "o Titulo deve ter no maximo 10 caracteres"
+        return;
+    }
+
     try {
       // 3. Enviar a requisição para o servidor
       const response = await fetch(`${webservice}/postar`, {
@@ -171,6 +177,7 @@ async function criarPost() {
       const data = await response.json();
       console.log('Post criado com sucesso:', data);
       alert('Post criado com sucesso!');
+      window.location.href = '/index.html';
       
     } catch (error) {
       console.error('Erro:', error);

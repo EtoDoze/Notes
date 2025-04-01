@@ -3,10 +3,25 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>Notes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@400">
   </head>
+
+  <div class="create-cont">
+    <input placeholder="titulo" id="titulo-post">
+    <div>
+    <input placeholder="conteudo" id="conteudo-post">
+    <p id="create_messager"></p>
+  </div>
+    <button onclick="criarPost()" class="p3r-menu-button">
+      <span class="p3r-button-bg"></span>
+      <span class="p3r-button-content">
+        <span class="p3r-button-text">CRIAR</span>
+        <span class="p3r-button-arrow">➤</span>
+      </span>
+</button>
+</div>
   <body id="bodyI">
     <div class="wave-background">
       <svg class="waves" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -20,14 +35,12 @@
     </div>
     <main>
       <aside>      
-        <input placeholder="titulo" id="titulo-post">
-        <input placeholder="conteudo" id="conteudo-post">
         <svg class="waves" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
         fill="rgba(0, 105, 255, 0.5)"></path>
       </svg>
         <img src="images/makoto.png">
-        <span class="material-symbols-rounded" onclick="criarPost()">add</span>
+        <span class="material-symbols-rounded" id="add-post-btn" onclick="toggleForm()">add</span>
       
           </aside>
           <div id="posts-container"></div>
