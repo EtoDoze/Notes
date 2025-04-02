@@ -497,7 +497,7 @@ aside .material-symbols-rounded:hover {
 
 
 .editor-container {
-    max-width: 60%;
+    max-width: 98%;
     margin: 0 auto;
     background: rgb(31, 31, 230);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -509,7 +509,7 @@ aside .material-symbols-rounded:hover {
 
 .toolbar {
     padding: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -522,6 +522,7 @@ aside .material-symbols-rounded:hover {
 .toolbar button, .toolbar select {
     padding: 2px 0px;
     width: 3.5vw;
+    margin: 2px;
     border: 1px solid #ccc;
     background: white;
     border-radius: 8px;
@@ -541,7 +542,7 @@ aside .material-symbols-rounded:hover {
     overflow-y: scroll;
     scrollbar-width: none;
     flex: 1; /* Ocupa todo espaço restante */
-    background: white; /* Fundo branco para o editor */
+    background: rgb(255, 255, 255); /* Fundo branco para o editor */
     border-radius: 0 5px 5px 0; /* Arredonda só o lado direito */
 }
 
@@ -553,3 +554,247 @@ aside .material-symbols-rounded:hover {
 #U-BTN, #fontBTN, #right-BTN {
     margin-bottom: 10px;
 }
+
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  /* Layout principal */
+  main {
+      flex-direction: column;
+      height: auto;
+      padding: 10px;
+      gap: 10px;
+  }
+
+  aside {
+      flex: 0 0 auto;
+      width: 100%;
+      height: 150px;
+      clip-path: none;
+      background: none;
+      border: none;
+
+      transform: none;
+      padding-bottom: 50px;
+  }
+
+  aside img {
+    display: none;
+      width: 120px;
+      left: 50%;
+      bottom: -40px;
+  }
+
+  aside svg{
+    display: none;
+  }
+
+  aside .material-symbols-rounded {
+      top: 20px;
+      right: 20px;
+      font-size: 60px;    
+      top: 50%;
+      left: 63%;
+      transform: translate(-50%, -50%);
+  }
+
+  /* Container de posts */
+  #posts-container {
+      flex-direction: column;
+      align-items: center;
+      overflow-y: visible;
+  }
+
+  .post {
+      width: 90%;
+      height: auto;
+      min-height: 200px;
+      margin-bottom: 15px;
+  }
+
+  /* Modal de criação */
+  .create-cont {
+      width: 90%;
+      height: 60%;
+  }
+
+  .create-cont input {
+      width: 80%;
+      height: 40px;
+  }
+
+  .p3r-menu-button {
+      width: 180px;
+      height: 45px;
+  }
+
+  /* Header */
+  #headerI {
+      height: 60px;
+  }
+
+  #headerI h4 {
+      font-size: 1.2rem;
+  }
+
+  /* Ajustes de texto */
+  .post h3, #post-titulo {
+      font-size: 1rem;
+  }
+
+  .post p, #post-conteudo {
+      font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-cont {
+      height: 70%;
+  }
+  
+  .p3r-button-content {
+      font-size: 14px;
+      padding: 0 10px;
+  }
+
+  aside .material-symbols-rounded{
+    left: 55%;
+    animation: none;
+  }
+}
+
+
+
+
+/*      EDITOR RES    */
+
+/* ===== RESPONSIVIDADE PÁGINA DE DETALHES ===== */
+@media (max-width: 768px) {
+  .bodyview {
+      padding: 10px;
+      height: auto;
+      min-height: 100vh;
+  }
+  
+  #titlepost {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+  }
+  
+  #post-titulo {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+  }
+  
+  #post-date {
+      font-size: 0.9rem;
+  }
+  
+  .editor-container {
+      max-width: 100%;
+      flex-direction: column;
+      margin-top: 10px;
+  }
+  
+  .toolbar {
+      width: 100%;
+      padding: 10px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+  }
+  
+  .toolbar-row {
+      display: flex;
+      gap: 5px;
+      margin: 5px 0;
+  }
+  
+  .toolbar button, .toolbar select {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 5px;
+      font-size: 0.9rem;
+  }
+  
+  .toolbar .material-symbols-rounded {
+      font-size: 1.2rem;
+  }
+  
+  .editor-content {
+      max-height: none;
+      height: 60vh;
+      padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #post-titulo {
+      font-size: 1.3rem;
+  }
+  
+  .toolbar {
+      padding: 5px;
+  }
+  
+  .toolbar button, .toolbar select {
+      min-width: 22px;
+      min-height: 10px;
+      font-size: 0.5rem;
+      size: 10px;
+      padding: 2px 0px;
+      width: 2.5vw;
+      border: 1px solid #ccc;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+  }
+  
+  .editor-content {
+      padding: 10px;
+      font-size: 16px; /* Melhor legibilidade em mobile */
+  }
+  #editor{
+    width: 100%;
+    height: 100vh;
+  }
+
+  .editor-container{
+    height: 76vh;
+  }
+  .toolbar-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  /* Melhorias na usabilidade para mobile */
+  button, select {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  select {
+    max-width: 120px;
+  }
+  
+  /* Ajuste para evitar zoom em inputs no iOS */
+  .editor-content {
+    font-size: 16px;
+    height: 100%;
+  }
+  
+  #titlepost{
+    color: #5867f5;
+    border-end-end-radius: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(15, 15, 66)
+  }
+}
+
+/* Estilos base para a barra de ferramentas */

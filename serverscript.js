@@ -337,7 +337,7 @@ async function EditPost() {
         const content = document.getElementById('editor').innerHTML;
         const token = localStorage.getItem('authToken');
 
-        if (!title || !content) {
+        if (!content) {
             return alert("O post não pode estar vazio!");
         }
 
