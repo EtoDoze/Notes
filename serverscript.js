@@ -1,4 +1,4 @@
-const webservice =  "http://localhost:3008" //"https://notes-backend-3c5r.onrender.com"
+const webservice = "https://notes-backend-3c5r.onrender.com" // "http://localhost:3008" //
 
 
 async function createuser() {
@@ -177,7 +177,7 @@ async function criarPost() {
       const data = await response.json();
       console.log('Post criado com sucesso:', data);
       alert('Post criado com sucesso!');
-      window.location.href = '/index.html';
+      location.href = location.href;
       
     } catch (error) {
       console.error('Erro:', error);

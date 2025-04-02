@@ -451,6 +451,8 @@ aside .material-symbols-rounded:hover {
 #posts-container {
     flex: 1;                 /* Ocupa todo espaço restante */
     display: flex;
+    overflow-y: scroll;
+    scrollbar-width: none;
     flex-wrap: wrap;         /* Quebra linhas se necessário */
     gap: 15px;              /* Espaço entre posts */
     justify-content: flex-start; /* Alinha posts à esquerda */
